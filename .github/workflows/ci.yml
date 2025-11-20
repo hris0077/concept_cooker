@@ -71,12 +71,15 @@ jobs:
         with:
           bundler-cache: true
 
+      - name: Build ALL assets (JavaScript + CSS)
+        run: bin/rails assets:precompile RAILS_ENV=test
+
       - name: Run tests
         env:
           RAILS_ENV: test
           # RAILS_MASTER_KEY: ${{ secrets.RAILS_MASTER_KEY }}
           # REDIS_URL: redis://localhost:6379/0
-        run: bundle exec rspec spec
+        run: bundle exec rspec
 
   system-test:
     runs-on: ubuntu-latest
@@ -98,6 +101,9 @@ jobs:
         uses: ruby/setup-ruby@v1
         with:
           bundler-cache: true
+      
+      - name: Build JavaScript assets
+        run: bin/rails assets:precompile RAILS_ENV=test
 
       - name: Run System Tests
         env:
