@@ -98,6 +98,9 @@ jobs:
         uses: ruby/setup-ruby@v1
         with:
           bundler-cache: true
+      
+      - name: Build JavaScript assets
+        run: bin/rails assets:precompile RAILS_ENV=test
 
       - name: Run System Tests
         env:
