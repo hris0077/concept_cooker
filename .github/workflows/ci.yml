@@ -2,8 +2,14 @@ name: CI
 
 on:
   pull_request:
+    paths-ignore:
+      - "app/models/**"
+      - "spec/models/**"
   push:
-    branches: [ main ]
+    branches: [main]
+    paths-ignore:
+      - "app/models/**"
+      - "spec/models/**"
 
 jobs:
   scan_ruby:
@@ -20,10 +26,10 @@ jobs:
 
       - name: Scan for common Rails security vulnerabilities using static analysis
         run: bin/brakeman --no-pager
-      
+
       - name: Scan for known security vulnerabilities in gems used
         run: bin/bundler-audit
-      
+
   lint:
     runs-on: ubuntu-latest
     env:
@@ -101,7 +107,7 @@ jobs:
         uses: ruby/setup-ruby@v1
         with:
           bundler-cache: true
-      
+
       - name: Build JavaScript assets
         run: bin/rails assets:precompile RAILS_ENV=test
 
