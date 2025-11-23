@@ -1,5 +1,3 @@
-require 'rails_helper'
-
 FactoryBot.define do
   factory :user, class: 'User' do
     sequence(:username) { |n| "Username #{n}" }
