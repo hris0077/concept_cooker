@@ -82,9 +82,6 @@ jobs:
         with:
           bundler-cache: true
 
-      - name: Build ALL assets (JavaScript + CSS)
-        run: bin/rails assets:precompile RAILS_ENV=test
-
       - name: Run model tests
         env:
           RAILS_ENV: test
