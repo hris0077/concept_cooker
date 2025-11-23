@@ -3,19 +3,19 @@ name: Models CI
 on:
   pull_request:
     paths:
-      - 'app/models/**'
-      - 'spec/models/**'
-      - 'db/migrate/**'
-      - 'db/schema.rb'
-      
+      - "app/models/**"
+      - "spec/models/**"
+      - "db/migrate/**"
+      - "db/schema.rb"
+
   push:
-    branches: [ main ]
-    paths: 
-      - 'app/models/**'
-      - 'spec/models/**'
-      - 'db/migrate/**'
-      - 'db/schema.rb'
-  
+    branches: [main]
+    paths:
+      - "app/models/**"
+      - "spec/models/**"
+      - "db/migrate/**"
+      - "db/schema.rb"
+
 jobs:
   scan_ruby:
     runs-on: ubuntu-latest
@@ -31,10 +31,10 @@ jobs:
 
       - name: Scan for common Rails security vulnerabilities using static analysis
         run: bin/brakeman --no-pager
-      
+
       - name: Scan for known security vulnerabilities in gems used
         run: bin/bundler-audit
-      
+
   lint:
     runs-on: ubuntu-latest
     env:
@@ -91,4 +91,3 @@ jobs:
           # RAILS_MASTER_KEY: ${{ secrets.RAILS_MASTER_KEY }}
           # REDIS_URL: redis://localhost:6379/0
         run: bundle exec rspec spec/models
-        
