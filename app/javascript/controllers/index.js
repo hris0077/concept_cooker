@@ -6,3 +6,12 @@ import { application } from "./application"
 
 import HelloController from "./hello_controller"
 application.register("hello", HelloController)
+
+import ToastController from "./toast_controller"
+application.register("toast", ToastController)
+
+import CountryController from "./country_controller"
+application.register("country", CountryController)
+
+import DialogController from "./dialog_controller"
+application.register("dialog", DialogController)

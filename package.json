@@ -2,7 +2,11 @@
   "name": "app",
   "private": true,
   "devDependencies": {
-    "esbuild": "^0.27.0"
+    "@typescript-eslint/eslint-plugin": "^8.48.0",
+    "@typescript-eslint/parser": "^8.48.0",
+    "esbuild": "^0.27.0",
+    "tsc-watch": "^7.2.0",
+    "typescript": "^5.9.3"
   },
   "scripts": {
     "build": "esbuild app/javascript/*.* --bundle --sourcemap --format=esm --outdir=app/assets/builds --public-path=/assets",
@@ -15,6 +19,7 @@
     "@hotwired/stimulus": "^3.2.2",
     "@hotwired/turbo-rails": "^8.0.20",
     "@popperjs/core": "^2.11.8",
+    "@rails/request.js": "^0.0.12",
     "autoprefixer": "^10.4.22",
     "bootstrap": "^5.3.8",
     "bootstrap-icons": "^1.13.1",

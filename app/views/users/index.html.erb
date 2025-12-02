@@ -1,0 +1,98 @@
+<div class="row mt-5 justify-content-md-center">
+  <div class="col-lg-8 ">
+    <div class="card overflow-auto">
+      <div class="card-body">
+        <div class="d-flex justify-content-between">
+          <h5 class="card-title">User list</h5>
+            <%=
+              link_to(
+                new_user_path,
+                data: { turbo_stream: true }, # makes the link a turbo_stream_request
+                class: 'btn btn-link text-decoration-none p-0 border-0'
+              ) do
+            %>
+            <i class="bi bi-person-plus-fill text-primary fs-4"></i>
+            <% end %>
+       
+        </div>
+        <table class="table table-hover">
+          <thead>
+            <tr>
+              <th>#</th>
+              <th>Name</th>
+              <th>Username</th>
+              <th>Position</th>
+              <th>Status</th>
+              <th>Action</th>
+            </tr>
+          </thead>
+          <tbody id="user-list">
+            <% if @users.any? %>
+              <%= render(@users) %>
+            <% end %>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+  <div class="col-lg-4">
+    <div class="card">
+      <div class="card-body">
+        <h5 class="card-title">Recent Activity <span>| Today</span></h5>
+
+        <div class="activity">
+
+          <div class="activity-item d-flex">
+            <div class="activite-label">32 min</div>
+            <i class="bi bi-circle-fill activity-badge text-success align-self-start"></i>
+            <div class="activity-content">
+              Quia quae rerum <a href="#" class="fw-bold text-dark">explicabo officiis</a> beatae
+            </div>
+          </div><!-- End activity item-->
+
+          <div class="activity-item d-flex">
+            <div class="activite-label">56 min</div>
+            <i class="bi bi-circle-fill activity-badge text-danger align-self-start"></i>
+            <div class="activity-content">
+              Voluptatem blanditiis blanditiis eveniet
+            </div>
+          </div><!-- End activity item-->
+
+          <div class="activity-item d-flex">
+            <div class="activite-label">2 hrs</div>
+            <i class="bi bi-circle-fill activity-badge text-primary align-self-start"></i>
+            <div class="activity-content">
+              Voluptates corrupti molestias voluptatem
+            </div>
+          </div><!-- End activity item-->
+
+          <div class="activity-item d-flex">
+            <div class="activite-label">1 day</div>
+            <i class="bi bi-circle-fill activity-badge text-info align-self-start"></i>
+            <div class="activity-content">
+              Tempore autem saepe <a href="#" class="fw-bold text-dark">occaecati voluptatem</a> tempore
+            </div>
+          </div><!-- End activity item-->
+
+          <div class="activity-item d-flex">
+            <div class="activite-label">2 days</div>
+            <i class="bi bi-circle-fill activity-badge text-warning align-self-start"></i>
+            <div class="activity-content">
+              Est sit eum reiciendis exercitationem
+            </div>
+          </div><!-- End activity item-->
+
+          <div class="activity-item d-flex">
+            <div class="activite-label">4 weeks</div>
+            <i class="bi bi-circle-fill activity-badge text-muted align-self-start"></i>
+            <div class="activity-content">
+              Dicta dolorem harum nulla eius. Ut quidem quidem sit quas
+            </div>
+          </div><!-- End activity item-->
+
+        </div>
+
+      </div>
+    </div>
+  </div>     
+</div>
