@@ -1,15 +1,20 @@
-name: CI
+name: Models CI
 
 on:
   pull_request:
-    paths-ignore:
+    paths:
       - "app/models/**"
       - "spec/models/**"
+      - "db/migrate/**"
+      - "db/schema.rb"
+
   push:
     branches: [main]
-    paths-ignore:
+    paths:
       - "app/models/**"
       - "spec/models/**"
+      - "db/migrate/**"
+      - "db/schema.rb"
 
 jobs:
   scan_ruby:
@@ -77,51 +82,9 @@ jobs:
         with:
           bundler-cache: true
 
-      - name: Build ALL assets (JavaScript + CSS)
-        run: bin/rails assets:precompile RAILS_ENV=test
-
-      - name: Run tests
+      - name: Run model tests
         env:
           RAILS_ENV: test
           # RAILS_MASTER_KEY: ${{ secrets.RAILS_MASTER_KEY }}
           # REDIS_URL: redis://localhost:6379/0
-        run: bundle exec rspec
-
-  system-test:
-    runs-on: ubuntu-latest
-
-    # services:
-    #  redis:
-    #    image: valkey/valkey:8
-    #    ports:
-    #      - 6379:6379
-    #    options: --health-cmd "redis-cli ping" --health-interval 10s --health-timeout 5s --health-retries 5
-    steps:
-      - name: Install packages
-        run: sudo apt-get update && sudo apt-get install --no-install-recommends -y node-gyp
-
-      - name: Checkout code
-        uses: actions/checkout@v5
-
-      - name: Set up Ruby
-        uses: ruby/setup-ruby@v1
-        with:
-          bundler-cache: true
-
-      - name: Build JavaScript assets
-        run: bin/rails assets:precompile RAILS_ENV=test
-
-      - name: Run System Tests
-        env:
-          RAILS_ENV: test
-          # RAILS_MASTER_KEY: ${{ secrets.RAILS_MASTER_KEY }}
-          # REDIS_URL: redis://localhost:6379/0
-        run: bundle exec rspec spec/system
-
-      - name: Keep screenshots from failed system tests
-        uses: actions/upload-artifact@v5
-        if: failure()
-        with:
-          name: screenshots
-          path: ${{ github.workspace }}/tmp/screenshots
-          if-no-files-found: ignore
+        run: bundle exec rspec spec/models
