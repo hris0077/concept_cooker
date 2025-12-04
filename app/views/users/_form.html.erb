@@ -1,0 +1,54 @@
+<%= form_with model: user, id: dom_id(user) do |f| %>
+  <div class="modal-body">
+    <div class="form-floating mb-3">
+      <%= f.text_field(:name, autofocus: true, autocomplete: "name", class: 'form-control', placeholder: 'Name') %>
+      <%= f.label :name %>
+      <% if user.errors[:name].any? %>
+        <div class="invalid-feedback d-block">
+          <%= user.errors[:name].to_sentence %>
+        </div>
+      <% end %>
+    </div>
+    <div class="form-floating mb-3">
+      <%= f.text_field(:username, autofocus: true, autocomplete: "username", class: 'form-control', placeholder: 'email123')  %>
+      <%= f.label :username %>
+       <% if user.errors[:username].any? %>
+        <div class="invalid-feedback d-block">
+          <%= user.errors[:username].to_sentence %>
+        </div>
+      <% end %>
+    </div>
+     <% if user.new_record? %>
+      <% if @minimum_password_length %>
+        <em>(<%= @minimum_password_length %> characters minimum)</em>
+      <% end %>
+      <div class="form-floating mb-3">
+        <%= f.password_field :password, autocomplete: "new-password", class: 'form-control', placeholder: 'new-password123'  %>
+        <%= f.label :password %>
+        <% if user.errors[:name].any? %>
+          <div class="invalid-feedback d-block">
+            <%= user.errors[:password].to_sentence %>
+          </div>
+        <% end %>
+      </div>
+   
+      <div class="form-floating mb-3">
+        <%= f.password_field :password_confirmation, autocomplete: "repeat-password", class: 'form-control', placeholder: 'repeat-password123' %>
+        <%= f.label :password_confirmation %>
+        <% if user.errors[:password_confirmation].any? %>
+          <div class="invalid-feedback d-block">
+            <%= user.errors[:password_confirmation].to_sentence %>
+          </div>
+        <% end %>
+      </div>
+    </div>
+    <% end %>
+  <div class="modal-footer">
+    <%= f.submit "Sign up", class: "btn btn-primary" %>
+    <% if turbo_frame_request? %>
+      <button  type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+        Close
+      </button>
+    <% end %>
+  </div>
+<%  end %>

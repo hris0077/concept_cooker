@@ -1,0 +1,23 @@
+<tr id="<%= dom_id(user) %>">
+  <th><%= user.id %></th>
+  <td><%= user.name %></td>
+  <td><%= user.username %></td>
+  <td>Senior Web Developer</td>
+  <td class="green"><span class="badge bg-success">Approved</span></td>
+  <td>
+    <div class="btn-group btn-group-sm">
+      <%=
+        link_to(
+          edit_user_path(user),
+          data: { turbo_stream: true },
+          class: 'btn btn-outline-light border-0 text-dark'
+        ) do
+      %>
+      <i class="bi bi-pencil-square"></i>
+      <% end %>
+      <%= link_to user_path(user), method: :delete, class: 'btn btn-outline-light border-0 text-danger', data: { turbo_confirm: 'Are you sure?', turbo_method: :delete } do %>
+        <i class="bi bi-x-square"></i>
+      <% end %>
+    </div>
+  </td>
+</tr>

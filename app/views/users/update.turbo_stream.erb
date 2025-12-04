@@ -1,0 +1,13 @@
+<% if @user.errors.empty? %>
+  <%= turbo_stream.update "flash" do %>
+    <%= render partial: 'shared/flash' %>
+  <% end %>
+
+  <%= turbo_stream.replace(@user,  # This uses dom_id(@user) internally
+    partial: "users/user", 
+    locals: { user: @user }
+  )%>
+  
+  <%= turbo_stream.action "close_frame_dialog", turbo_frame_request_id %>
+<% end %>
+

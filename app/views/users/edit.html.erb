@@ -1,0 +1,11 @@
+<%= turbo_frame_tag 'user-form-frame', refresh: "replace" do %>
+    <div style="background: yellow; padding: 10px;">
+    <strong>DEBUG: This content should appear in the modal</strong>
+    <p>User: <%= @user.name %></p>
+  </div>
+  <div class="modal-header">
+    <h1 class="modal-title fs-5" id="myModalLabel">Edit User</h1>
+    <button class="btn-close" data-bs-dismiss="modal"></button>
+  </div>
+    <%= render partial: "users/form", locals: { user: @user } %>
+<% end %>

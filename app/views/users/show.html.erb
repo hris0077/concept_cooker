@@ -1,0 +1,3 @@
+<%= turbo_frame_tag('main-dashboard') do %>
+  <%= render(partial: 'form', locals: { user: @user }) if @user %>
+<% end %>

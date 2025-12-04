@@ -1,0 +1,12 @@
+<% if @user.persisted? %>
+  <%= turbo_stream.update "flash" do %>
+    <%= render partial: 'shared/flash' %>
+  <% end %>
+
+  <%= turbo_stream.append "user-list" do %>
+    <%= render @user %>
+  <% end %>
+
+  <%= turbo_stream.action "close_frame_dialog", turbo_frame_request_id %>
+<% end %>
+
