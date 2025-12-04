@@ -14,7 +14,6 @@ class UsersController < ApplicationController
     @minimum_password_length = 6  # or get from model validation
 
     # after makeing a turbo_stream request from the link we need to add format
-    
   end
 
   def create
@@ -27,8 +26,8 @@ class UsersController < ApplicationController
       end
     else
       respond_to do |format|
-        format.html { render :new, status: :unprocessable_entity  } 
-        format.json { render  json: @user.errors, status: :unprocessable_entity }
+        format.html { render :new, status: :unprocessable_entity  }
+        format.json { render json: @user.errors, status: :unprocessable_entity }
       end
     end
   end
@@ -45,8 +44,8 @@ class UsersController < ApplicationController
       end
     else
       respond_to do |format|
-        format.html { render :edit, status: :unprocessable_entity } 
-        format.json { render  json: @user.errors, status: :unprocessable_entity }
+        format.html { render :edit, status: :unprocessable_entity }
+        format.json { render json: @user.errors, status: :unprocessable_entity }
       end
     end
   end
