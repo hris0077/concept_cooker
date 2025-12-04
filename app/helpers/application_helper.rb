@@ -4,13 +4,13 @@ module ApplicationHelper
   end
 
   def render_flash_stream
-    turbo_stream.update('flash', partial: 'shared/flash')
+    turbo_stream.update("flash", partial: "shared/flash")
   end
 
   def flash_class(type)
     case type
-    when 'notice' then 'success'
-    when 'alert' then 'danger'
+    when "notice" then "success"
+    when "alert" then "danger"
     end
   end
 end
