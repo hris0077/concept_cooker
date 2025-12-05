@@ -1,32 +1,36 @@
 class BsFormBuilder < ActionView::Helpers::FormBuilder
-  delegate :safe_join, to: :@template
+  delegate :safe_join, :content_tag, to: :@template
 
-  def bs_text_field_wrapper(field, method, options = {})
-    if options[:wrapper_div_classes]
-      wrapper_div_classes = options[:wrapper_div_classes]
-    else
-      wrapper_div_classes = "form-floating mb-3"
+  def text_field(method, options={})
+    options[:class] = "form-control #{options[:class]}".strip
+    options[:placeholder] ||= method.to_s.humanize
+    
+    content_tag(:div, class: "form-floating mb-3") do
+      safe_join([
+        super(method, options),
+        label(method),
+        field_errors(method)
+      ])
     end
-    options[:placeholder] = method.to_s.humanize if options[:placeholder].nil?
-    options[:class] = "form-control" if options[:class].nil?
-    errors_markup =  if @object.errors[method].any?
-      "<div class=\"invalid-feedback d-block\">#{@object.errors[method].to_sentence}</div>".html_safe
-    end
-
-    safe_join [
-      "<div class=\"#{wrapper_div_classes}\">".html_safe,
-      send(field, method, options),
-      label(method),
-      errors_markup,
-      "</div>".html_safe
-    ].compact
   end
 
-  def bs_text_field(method, options = {})
-    bs_text_field_wrapper("text_field", method, options)
+
+  def password_field(method, options={})
+    options[:class] = "form-control #{options[:class]}".strip
+    options[:placeholder] ||= method.to_s.humanize
+    
+    content_tag(:div, class: "form-floating mb-3") do
+      safe_join([
+        super(method, options),
+        label(method),
+        field_errors(method)
+      ])
+    end
   end
 
-  def bs_password_field(method, options = {})
-    bs_text_field_wrapper("password_field", method, options)
+
+  def field_errors(method)
+    return unless @object.errors[method].any?
+    content_tag(:div, @object.errors[method].to_sentence, class: "invalid-feedback d-block")
   end
 end
