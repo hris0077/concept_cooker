@@ -16,4 +16,6 @@ class User < ApplicationRecord
   validates :password, length: { in: 6..20 }
   validates :password, confirmation: true, unless: -> { password.blank? }
   validates :password_confirmation, presence: true, on: :create
+
+  has_many :logs, as: :record
 end

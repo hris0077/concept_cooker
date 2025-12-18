@@ -1,0 +1,9 @@
+<div class="activity-item d-flex">
+  <div class="activite-label" data-time-created="<%= audit_log.created_at.iso8601 %>" data-time-now="<%= DateTime.now %>"><%# time_ago_in_words(audit_log.created_at) %>
+    <time-ago target="activite-label"></time-ago>
+  </div>
+  <i class="bi bi-circle-fill activity-badge text-success align-self-start"></i>
+  <div class="activity-content">
+    <%= audit_log.event_name %> <a href="#" class="fw-bold text-dark">by <%= audit_log.loggable.name  %></a> on <%= audit_log.loggable_type %>
+  </div>
+</div>

@@ -1,8 +1,14 @@
 // Entry point for the build script in your package.json
 import "@hotwired/turbo-rails"
 import "./controllers"
+import "./components"
 import * as bootstrap from "bootstrap"
 import "@rails/request.js"
+import * as ActionCable from '@rails/actioncable'
+ActionCable.logger.enabled = true
+
+// Action Cable will be available globally
+console.log('ActionCable available?', typeof ActionCable !== 'undefined')
 
 
 Turbo.StreamActions.close_frame_dialog = function() {
