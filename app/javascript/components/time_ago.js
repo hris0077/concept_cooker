@@ -4,12 +4,14 @@ class TimeAgo extends HTMLElement {
     super();
   }
   connectedCallback() {
-    console.log('connected custom component');
-    console.log(this.closest(".activite-label").dataset.timeCreated);
-    this.updateTime();
+    // console.log('connected custom component');
+    const timeNow = this.closest(".activite-label")?.dataset.timeNow;
+    // console.log(timeNow);
+
+    this.updateTime(timeNow);
     this.intervalId = setInterval(() => {
-      console.log('30-second update triggered');
-      this.updateTime();
+      // console.log('30-second update triggered');
+      this.updateTime(new Date());
     }, 30000); 
   }
 
@@ -17,20 +19,22 @@ class TimeAgo extends HTMLElement {
     // Clean up interval when element is removed
     if (this.intervalId) {
       clearInterval(this.intervalId);
-      console.log('Interval cleared');
+      // console.log('Interval cleared');
     }
   }
 
-  updateTime() {
+  updateTime(timestampSource) {
     const timeCreated = this.closest(".activite-label")?.dataset.timeCreated;
-    const timeNow = this.closest(".activite-label")?.dataset.timeNow;
+    
 
     if (!timeCreated) return;
     
     const past = Date.parse(timeCreated);
-    const now = Date.parse(timeNow);
+    const now = Date.parse(timestampSource);
     const diffMs = now - past;
-    this.textContent = this.calculateTime(diffMs);
+    const result = this.calculateTime(diffMs);
+    // console.log("result=" + result);
+    this.textContent = result;
   }
 
 

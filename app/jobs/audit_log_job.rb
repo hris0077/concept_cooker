@@ -5,9 +5,8 @@ class AuditLogJob < ApplicationJob
   def perform(event_name:, loggable:, request_id:, metadata:, created_by_id:)
     # Reify loggable (optional: skip if you only need IDs)
     # loggable = loggable_type.constantize.find_by(id: loggable.id)
+
     record = loggable&.class.find_by(id: loggable&.id)
-    puts "loggable"
-    Rails.logger.info(record)
     return unless record
 
     params  = {

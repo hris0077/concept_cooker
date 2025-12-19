@@ -31,15 +31,8 @@ class UsersController < ApplicationController
 
   def create
     @user = User.new(user_params)
+    @record = @user
     if @user.save
-      Rails.event.notify(
-        "users.create",
-        payload: {
-          loggable: @user,
-          changes: @user.previous_changes,
-          request: request.request_id
-        }
-      )
       flash.now[:success] = "<strong>#{@user.name}</strong> has been created!".html_safe
       respond_to do |format|
         format.turbo_stream
