@@ -20,7 +20,9 @@
 
 class AuditLog < ApplicationRecord
   belongs_to :created_by, class_name: "User"
-  belongs_to :loggable, polymorphic: true
+  # belongs_to :loggable, polymorphic: true
+
+  serialize :metadata, coder: EnhancedMetadata
 
   broadcasts_to ->(audit_log) { "audit_logs" }, inserts_by: :prepend
 end

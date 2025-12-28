@@ -1,6 +1,4 @@
 class UsersController < ApplicationController
-  include EventPublisher
-
   before_action :find_user, only:  %i[show destroy update edit]
 
   def index

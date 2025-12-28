@@ -7,16 +7,16 @@ class EventSubscriber
     when ->(e) { crud_event?(e) }
       AuditLogJob.set(queue: :audit).perform_later(
         event_name: event[:name],
-        loggable: event[:payload][:loggable],
+        loggable: { audit_type: event[:payload][:loggable_type], audit_id: event[:payload][:loggable_id]},
         request_id: event[:payload][:request],
-        metadata: event[:payload][:changes],
-        created_by_id: 5
+        metadata: { changes: event[:payload][:changes], attributes: event[:payload][:attributes] },
+        created_by_id: User.first.id
       )
     end
   end
 
   def crud_event?(event_name)
-    event_name.ends_with?(".update", ".create", ".delete")
+    event_name.ends_with?(".update", ".create", ".destroy")
   end
 end
 

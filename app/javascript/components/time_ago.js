@@ -19,7 +19,7 @@ class TimeAgo extends HTMLElement {
     // Clean up interval when element is removed
     if (this.intervalId) {
       clearInterval(this.intervalId);
-      // console.log('Interval cleared');
+      console.log('Interval cleared');
     }
   }
 
