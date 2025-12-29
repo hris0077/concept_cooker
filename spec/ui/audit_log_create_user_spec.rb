@@ -14,16 +14,16 @@ RSpec.describe "Event Publisher Integration", type: :ui,  perform_enqueued: true
       let(:params) do
         {
           event_name: 'users.create',
-          loggable: {audit_id: user1.id, audit_type: "User"},
+          loggable: { audit_id: user1.id, audit_type: "User" },
           request_id: "RequestString",
-          metadata: {name: user1.name},
+          metadata: { name: user1.name },
           created_by_id: user1.id
         }
       end
       it "handles events in background job" do
         ActiveJob::Base.queue_adapter = :test
-        
-        expect {user}.to have_enqueued_job(AuditLogJob).once
+
+        expect { user }.to have_enqueued_job(AuditLogJob).once
         perform_enqueued_jobs
         expect(AuditLogJob).to have_been_performed
         expect(AuditLog.last.loggable_id).to eq(user.id)

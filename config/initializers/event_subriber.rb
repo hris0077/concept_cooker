@@ -7,7 +7,7 @@ class EventSubscriber
     when ->(e) { crud_event?(e) }
       AuditLogJob.set(queue: :audit).perform_later(
         event_name: event[:name],
-        loggable: { audit_type: event[:payload][:loggable_type], audit_id: event[:payload][:loggable_id]},
+        loggable: { audit_type: event[:payload][:loggable_type], audit_id: event[:payload][:loggable_id] },
         request_id: event[:payload][:request],
         metadata: { changes: event[:payload][:changes], attributes: event[:payload][:attributes] },
         created_by_id: User.first.id
