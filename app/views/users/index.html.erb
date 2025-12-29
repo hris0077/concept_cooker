@@ -28,10 +28,6 @@
 
         <div class="activity">
           <%= turbo_stream_from "audit_logs" %>
-
-          <div id="messages-container">
-              <!-- Messages will appear here -->
-            </div>
           
           <%= turbo_frame_tag :audit_logs do %>
             <% if @audit_logs.any? %>
