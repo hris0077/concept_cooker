@@ -86,29 +86,8 @@
               Dicta dolorem harum nulla eius. Ut quidem quidem sit quas
             </div>
           </div><!-- End activity item-->
-
         </div>
-
       </div>
     </div>
   </div>     
 </div>
-
-<script>
-document.addEventListener('turbo:load', () => {
-  // Find what turbo_stream_from generated
-  const turboStreamEl = document.querySelector('[data-turbo-stream-source]')
-  console.log('Turbo stream element:', turboStreamEl)
-  
-  if (turboStreamEl) {
-    const signedStreamName = turboStreamEl.getAttribute('data-turbo-stream-source')
-    console.log('🔑 Client is subscribed to (signed):', signedStreamName)
-    console.log('📋 Copy this for testing:', signedStreamName)
-    
-    // Copy to clipboard for easy testing
-    navigator.clipboard.writeText(signedStreamName).then(() => {
-      console.log('Signed stream name copied to clipboard!')
-    })
-  }
-})
-</script>
