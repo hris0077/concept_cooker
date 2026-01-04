@@ -54,7 +54,9 @@ jobs:
             rubocop-${{ runner.os }}-${{ env.DEPENDENCIES_HASH }}-
 
       - name: Lint code for consistent style
-        run: bin/rubocop -f github
+          echo "=== Full RuboCop Output ==="
+        run: bin/rubocop -f clang
+        # run: bin/rubocop -f github
 
   test:
     runs-on: ubuntu-latest

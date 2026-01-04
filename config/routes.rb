@@ -1,4 +1,9 @@
 Rails.application.routes.draw do
+  resources :addresses do
+    collection do
+      get :states
+    end
+  end
   get "hello_world/index"
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 
@@ -12,5 +17,6 @@ Rails.application.routes.draw do
 
   # Defines the root path route ("/")
   # root "posts#index"
+  resources :users
   root "hello_world#index"
 end
