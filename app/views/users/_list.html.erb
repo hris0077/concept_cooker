@@ -1,0 +1,22 @@
+
+<table class="table table-hover">
+  <thead>
+    <tr>
+      <th>#</th>
+      <th>Name</th>
+      <th>Username</th>
+      <th>Position</th>
+      <th>Status</th>
+      <th>Action</th>
+    </tr>
+  </thead>
+  <tbody id="user-list">
+    <%= render(users) if users.any? %>
+  </tbody>
+</table>
+
+<% if pagy.pages > 1 %>
+  <div class="d-flex justify-content-center pt-3">
+    <%== pagy.series_nav(:bootstrap) %>
+  </div>
+<% end %>

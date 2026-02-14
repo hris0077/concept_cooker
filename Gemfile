@@ -30,8 +30,9 @@ gem "tzinfo-data", platforms: %i[ windows jruby ]
 
 # Use the database-backed adapters for Rails.cache, Active Job, and Action Cable
 gem "solid_cache"
-gem "solid_queue"
+gem "solid_queue", "~> 0.4.1"
 gem "solid_cable"
+gem "redis", "~> 5.0"
 
 # Reduces boot times through caching; required in config/boot.rb
 gem "bootsnap", require: false
@@ -66,7 +67,7 @@ group :development do
   # Use console on exceptions pages [https://github.com/rails/web-console]
   gem "web-console"
   gem "annotate"
-  gem "hotwire-spark"
+  # gem "hotwire-spark"
 end
 
 group :test do
@@ -79,3 +80,10 @@ group :development, :test do
   gem "rspec-rails"
   gem "factory_bot_rails"
 end
+
+group :development, :test do
+  gem "rspec-rails"
+  gem "factory_bot_rails"
+end
+
+gem "pagy", "~> 43.2"

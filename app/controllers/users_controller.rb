@@ -2,8 +2,19 @@ class UsersController < ApplicationController
   before_action :find_user, only:  %i[show destroy update edit]
 
   def index
-    @users = User.all
+    @pagy, @users = pagy(User.all)
     @user = User.new
+
+    @pagy_logs, @audit_logs = pagy(AuditLog.all.order(created_at: :desc).limit(5))
+
+    # Rails.logger.debug "=== DEBUG ==="
+    # Rails.logger.debug "Request format: #{request.format}"
+    # Rails.logger.debug "Params: #{params.inspect}"
+    # Rails.logger.debug "Turbo Frame?: #{request.headers['Turbo-Frame']}"
+
+    respond_to do |format|
+      format.html
+    end
   end
 
   def show
@@ -18,6 +29,7 @@ class UsersController < ApplicationController
 
   def create
     @user = User.new(user_params)
+    @record = @user
     if @user.save
       flash.now[:success] = "<strong>#{@user.name}</strong> has been created!".html_safe
       respond_to do |format|
@@ -67,5 +79,6 @@ class UsersController < ApplicationController
 
   def find_user
     @user = User.find(params[:id])
+    @record = @user
   end
 end

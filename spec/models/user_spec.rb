@@ -14,13 +14,13 @@
 require 'rails_helper'
 
 RSpec.describe User, type: :model do
-  subject(:record) { build(:user) }
+  subject(:user) { build(:user) }
 
-  it "has a valid factory" do
-    expect(record).to be_valid
+  it 'has a valid factory' do
+    expect(user).to be_valid
   end
 
-  it "can be saved to the database" do
-    expect { record.save! }.not_to raise_error
+  it 'can be saved to the database' do
+    expect { user.save! }.not_to raise_error
   end
 end

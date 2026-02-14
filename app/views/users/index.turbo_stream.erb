@@ -1,0 +1,3 @@
+<%= turbo_stream.update "users_frame" do %>
+  <%= render 'list', users: @users, pagy: @pagy %>
+<% end %>
