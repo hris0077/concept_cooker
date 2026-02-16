@@ -82,3 +82,4 @@ group :development, :test do
 end
 
 gem "pagy", "~> 43.2"
+gem 'action_text-trix', '~> 2.1.16'
