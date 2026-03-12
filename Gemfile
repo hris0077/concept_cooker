@@ -81,5 +81,5 @@ group :development, :test do
   gem "factory_bot_rails"
 end
 
-gem "pagy", "~> 43.2"
+gem "pagy", "~> 43.3"
 gem "action_text-trix", "~> 2.1.16"
